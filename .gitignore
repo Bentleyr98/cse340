@@ -19,3 +19,5 @@ READMD.md
 
 # This file should never be altered
 pnpm-lock.yaml
+
+settings.json

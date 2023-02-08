@@ -227,3 +227,8 @@ VALUES   (
     'White',
     5
   );
+
+
+-- Q6 Update path column in inventory
+UPDATE inventory
+SET inv_image = REPLACE(inv_image, '/images', '/images/vehicles'), inv_thumbnail = REPLACE(inv_thumbnail, '/images', '/images/vehicles');

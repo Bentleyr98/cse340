@@ -16,5 +16,4 @@ async function getVehiclesByClassificationId(classificationId){
 }
 
 
-module.exports = {getClassifications};
 module.exports = {getClassifications, getVehiclesByClassificationId};

@@ -5,18 +5,21 @@
   box-sizing: border-box;
 }
 
-input:required:invalid, input:focus:invalid {
-  background-color: red;
-  /* background-image: url(/images/invalid.png);
-  background-position: right top;
-  background-repeat: no-repeat; */
+input:focus:required, textarea:focus:required {
+  outline: solid red 2px;
+ }
+
+.big{
+  font-size: larger;
+}
+
+ .line{
+  border: rgb(51, 51, 51) solid 2px;
+  width: 100%;
  }
 
  input:required:valid {
-  background-color: green;
-  /* background-image: url(/images/valid.png);
-  background-position: right top;
-  background-repeat: no-repeat; */
+    outline: solid green 2px;
  }
 
 header{
@@ -85,6 +88,32 @@ nav ul{
 
 .details hr {
   border: black dashed 1px;
+}
+
+.notice{
+  color: red;
+  padding-left: 30px;
+}
+
+form {
+  box-sizing: border-box;
+  background-color: rgb(252, 250, 121);
+  padding: 2rem;
+  border: 4px solid gray;
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  gap: 10px;
+}
+
+form input[type=submit]{
+  width: 150px;
+  /* margin: auto; */
+  float: left;
+}
+
+form input, textarea, select{
+  width: 300px;
 }
 
 .details {
@@ -221,7 +250,7 @@ nav ul{
   border: black solid 1px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 700px) {
   body {
     background-image: url("/images/site/small_check.jpg");
   }
@@ -268,6 +297,12 @@ nav ul{
     margin-right: 50px;
     margin-left: 20px;
   }
+
+  /* .form-center {
+    display:flex;
+    justify-items: center;
+  } */
+
 
 
   .advertise {

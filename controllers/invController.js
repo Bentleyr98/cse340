@@ -4,10 +4,13 @@ const utilities = require("../utilities")
 const invCont = {}
 
 invCont.buildByClassification = async function (req, res, next) {
-    const classificationId = req.params.classificationId
+    const classificationId = parseInt(req.params.classificationId)
     let data = await invModel.getVehiclesByClassificationId(classificationId)
     let nav = await utilities.getNav()
-    const className = data[0].classification_name
+    let className = req.params.classification_name
+    if(data.length > 0){
+    className = data[0].classification_name}
+
     res.render("./inventory/classification-view", {
         title: className + " vehicles",
         nav,
@@ -55,9 +58,11 @@ invCont.addClassification = async function (req, res, next) {
 
 invCont.addVehicle = async function (req, res, next) {
     let nav = await utilities.getNav()
+    let classifications = await utilities.getClassifications()
     res.render("../views/inventory/add-vehicle-view", {
         title: "Add New Vehicle",
         nav,
+        classifications,
         message: null,
     })
 
@@ -67,7 +72,6 @@ invCont.addVehicle = async function (req, res, next) {
  *  Process classification request
  **************************************** */
 invCont.registerClassification = async function (req, res) {
-    let nav = await utilities.getNav()
     const { classification_name } =
       req.body
   
@@ -75,6 +79,7 @@ invCont.registerClassification = async function (req, res) {
         classification_name
     )
     console.log(regResult)
+    let nav = await utilities.getNav()
     if (regResult) {
       res.status(201).render("inventory/management-view.ejs", {
         title: "Vehicle Management",
@@ -97,8 +102,34 @@ invCont.registerClassification = async function (req, res) {
  *  Process vehicle request
  **************************************** */  
 invCont.registerVehicle = async function (req, res) {
+    const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } =
+      req.body
+  
+    const inv_image = "/images/vehicles/no-image.png"
+    const inv_thumbnail = "/images/vehicles/no-image-tn.png"
+    const regResult = await invModel.registerVehicle(
+        inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail
+    )
+    console.log(regResult)
     let nav = await utilities.getNav()
-    return nav
+    let classifications = await utilities.getClassifications()
+    if (regResult) {
+      res.status(201).render("inventory/management-view.ejs", {
+        title: "Vehicle Management",
+        nav,
+        message: `The ${inv_make} ${inv_model} vehicle was successfully added.`,
+        errors: null,
+      })
+    } else {
+      const message = "Sorry, it failed to add the new vehicle."
+      res.status(501).render("inventory/add-vehicle-view.ejs", {
+        title: "Add New Vehicle",
+        nav,
+        classifications,
+        message,
+        errors: null,
+      })
+    }
   }
 
 module.exports = invCont;

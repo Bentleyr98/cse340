@@ -32,6 +32,20 @@ async function registerClassification( classification_name ){
             "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
             return await pool.query(sql, [
                 classification_name
+            ])    
+    }
+
+    catch (error) {
+        return error.message
+    }
+}
+
+async function registerVehicle( inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail ){
+    try {
+        const sql = 
+            "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+            return await pool.query(sql, [
+                inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail
             ])
     }
 
@@ -42,4 +56,4 @@ async function registerClassification( classification_name ){
 
 }
 
-module.exports = {getClassifications, getVehiclesByClassificationId, getVehiclesByInvId, registerClassification};
+module.exports = {getClassifications, getVehiclesByClassificationId, getVehiclesByInvId, registerClassification, registerVehicle};

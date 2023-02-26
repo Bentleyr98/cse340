@@ -1,0 +1,36 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<% if (message) { %>
+    <p class="notice"><%= message %></p>
+<% } %>
+
+<form action="/inv/add-vehicle" method="post">
+    <label for="invMake">Make</label>
+    <input type="text" name="inv_make" id="invMake" required placeholder="Enter a valid make>
+    <label for="invModel">Model</label>
+    <input type="text" name="inv_model" id="invModel" required placeholder="Enter a valid model"> 
+    <label for="invYear">Year</label>
+    <input type="text" name="inv_year" id="invYear" required placeholder="Enter a valid year">
+    <label for="invDesc">Description</label>
+    <input type="text" name="inv_description" id="invDesc" required placeholder="Enter a valid description">
+    <label for="invPrice">Price</label>
+    <input type="text" name="inv_price" id="invPrice" required placeholder="Enter a valid price">
+    <label for="invMiles">Miles</label>
+    <input type="text" name="inv_miles" id="invMiles" required placeholder="Enter the correct amount miles">
+    <label type="invColor">Color</label>
+    <input type="text" name="inv_color" id="invColor" required placeholder="Enter the color">
+    <label for="cars">Classification</label>
+    <select id="cars" name="classification_name" required>
+        <option value="volvo"></option>
+        <option value="saab">Saab</option>
+        <option value="fiat">Fiat</option>
+        <option value="audi">Audi</option>
+        <option value="audi">Audi</option>
+      </select>
+    <input type="submit" value="Add Classification">
+</form>

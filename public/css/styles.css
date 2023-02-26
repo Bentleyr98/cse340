@@ -5,6 +5,20 @@
   box-sizing: border-box;
 }
 
+input:required:invalid, input:focus:invalid {
+  background-color: red;
+  /* background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat; */
+ }
+
+ input:required:valid {
+  background-color: green;
+  /* background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat; */
+ }
+
 header{
   display: flex;
   justify-content: space-between;
@@ -17,7 +31,11 @@ header{
   text-decoration: none;
   color: black;
   font-weight: bold;
-  
+  padding-left: 20px;
+}
+
+p.copyright, .title{
+  padding-left: 20px;
 }
 
 .accountLink a{
@@ -29,14 +47,14 @@ header{
 nav{
   width:100%;
   height: 50px;
-  background-color: #19037a;
-  /* background-color: #005C53; */
+  background-color: #042940;
 }
 
-nav ul li{
+nav ul li a{
   margin: 18px 18px 18px 10px;
   font-size: 15pt;
   color: white;
+  text-decoration: none;
 }
 
 nav ul{
@@ -47,6 +65,65 @@ nav ul{
   justify-content: left;
   padding: 0;
   margin-top: 0;
+}
+
+.managementLinks {
+  margin-left: 30px;
+}
+
+.inv-detail{
+  display: grid;
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.inv-detail img {
+  border: black solid 2px;
+  max-width: 100%;
+  margin: 20px;
+}
+
+.details hr {
+  border: black dashed 1px;
+}
+
+.details {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 15pt;
+}
+
+.vehicle {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 230px;
+  border-radius: 5px;
+  list-style: none;
+  margin: 10px;
+  padding: 15px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.vehicle a img {
+  border: rgb(61, 61, 61) solid 0.5px;
+}
+
+.vehicle h2 a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.vehicle a:visited{
+  color: black
+}
+
+#inv-display{
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .front img {
@@ -67,7 +144,7 @@ nav ul{
 }
 
 .advertise{
-  color: purple;
+  color: #005C53;
   position: absolute;
   margin-bottom: 3px;
   top: 200px;
@@ -93,6 +170,11 @@ nav ul{
 
 .reviews ul li{
   padding: 8px 0px;
+
+}
+
+.reviews ul li, .upgrade a {
+  font-size: 14pt;
 }
 
 .reviews ul{
@@ -107,26 +189,34 @@ nav ul{
   font-size: 16pt;
 }
 
-.upgrades{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+.upgrade_boxes{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 30px;
+  margin-left: 30px;
+}
 
+.upgrade a {
+  width: 150px;
+  text-align: center;
+  margin-top: 5px;
 }
 
 .upgrade{
   display: flex;
- 
-  width: 40%;
-  margin: 10px;
+  width: 200px;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.upgrades_all{
+  display: flex;
   flex-direction: column;
 }
 
 .upgrade img{
   background-color: rgb(176, 176, 231);
-  padding: 15px 50px;
+  padding: 15px 80px;
   height: 100px;
   border: black solid 1px;
 }
@@ -138,8 +228,8 @@ nav ul{
 
   div#wrapper {
     background-color: white;
-    margin:20px 80px;
-    border: purple 3px solid;
+    margin:20px 120px;
+    border: #DBF227 3px solid;
   }
 
   /* nav ul{
@@ -148,7 +238,10 @@ nav ul{
   } */
 
   header {
-    padding: 20px;
+    padding-left: 0px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
     margin: 0;
   }
 
@@ -165,10 +258,26 @@ nav ul{
     margin: 0 15px;
   }
 
+  .inv-detail{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 30px;
+  }
+
+  .details {
+    margin-right: 50px;
+    margin-left: 20px;
+  }
+
+
   .advertise {
     top: 300px;
     left: 150px;
     width: 200px;
+  }
+
+  .siteName a{
+    padding-left: 20px;
   }
 
   .advertise img{
@@ -177,7 +286,9 @@ nav ul{
 
   .large{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    margin: 30px 0px;
+    justify-content: space-between;
     
   }
 
@@ -194,6 +305,7 @@ nav ul{
   .reviews{
     grid-row: 1/2;
     grid-column: 2/3;
+    padding-right: 100px;
   }
 
 }

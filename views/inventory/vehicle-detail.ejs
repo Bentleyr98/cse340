@@ -1,0 +1,14 @@
+<!--  h1 content -->
+<% if (title) { %>
+    <h1 class="title"> <%= data.rows[0].inv_year + " " + title %> </h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+<!-- Message -->
+<% if (message) { %>
+    <p class="notice"><%= message %></p>
+    <% } %>
+    
+<!-- Main body section -->
+<%- view %>

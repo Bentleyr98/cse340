@@ -2,7 +2,6 @@ const invModel = require("../models/inventory-model")
 const Util = {}
 
 // Constructs the nav HTML unordered list
-
 Util.buildNav = function (data) {
     let list = "<ul>"
     list += '<li><a href="/" title="Home page">Home</a></li>'
@@ -28,6 +27,20 @@ Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications()
     nav = Util.buildNav(data)
     return nav
+}
+
+// builds html for individual vehicle detail view
+Util.buildVehicle = async function (data) {
+    let view =  `
+    <div class="inv-detail">
+    <img src="${data.rows[0].inv_image}" alt="Image of ${data.rows[0].inv_make + "" + data.rows[0].inv_model}"></img>
+    <div class="details">
+    <p><span class="bold">Price:</span> $${new Intl.NumberFormat('en-US').format(data.rows[0].inv_price)}</p>
+    <p><span class="bold">Color:</span> ${data.rows[0].inv_color}</p>
+    <p><span class="bold">Miles:</span> ${new Intl.NumberFormat('en-US').format(data.rows[0].inv_miles)}</p>
+    <hr />
+    <p><span class="bold">Description:</span> ${data.rows[0].inv_description}</p></div></div>`
+    return view
 }
 
 module.exports = Util

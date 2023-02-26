@@ -15,5 +15,31 @@ async function getVehiclesByClassificationId(classificationId){
     }
 }
 
+async function getVehiclesByInvId(vehicleId){
+    try {
+        const data = await pool.query("SELECT * FROM public.inventory AS i WHERE i.inv_id = $1", [vehicleId])
+        return data
+    }
+    catch(error){
+        console.error('getvehiclesbyid error' + error)
+    }
+}
 
-module.exports = {getClassifications, getVehiclesByClassificationId};
+
+async function registerClassification( classification_name ){
+    try {
+        const sql = 
+            "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+            return await pool.query(sql, [
+                classification_name
+            ])
+    }
+
+    catch (error) {
+        return error.message
+    }
+
+
+}
+
+module.exports = {getClassifications, getVehiclesByClassificationId, getVehiclesByInvId, registerClassification};

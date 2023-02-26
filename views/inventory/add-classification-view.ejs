@@ -1,0 +1,18 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<% if (message) { %>
+    <p class="notice"><%= message %></p>
+<% } %>
+
+<form action="/inv/add-classification" method="post">
+    <label for="class">FIELD IS REQUIRED</label>
+    <label for="class">Classification Name</label>
+    <label for="class">NAME MAY  NOT CONTAIN A SPACE OR SPECIAL CHARACTER OF ANY KIND</label>
+    <input type="text" name="classification_name" id="class" required placeholder="Enter a valid classification">
+    <input type="submit" value="Add Classification">
+</form>

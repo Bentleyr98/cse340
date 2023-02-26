@@ -1,0 +1,33 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<% if (message) { %>
+    <p class="notice"><%= message %></p>
+<% } %>
+
+<% if (errors) { %>
+    <p class="notice"><%= errors %></p>
+<% } %>
+
+
+<form action="/clients/register" method="post">
+    <label for="fname">First name</label>
+    <input type="text" name="client_firstname" id="fname" required placeholder="Enter your first name">
+    <label for="lname">Last name</label>
+    <input type="text" name="client_lastname" id="lname" required placeholder="Enter your last name">
+    <label for="email">Email address</label>
+    <input type="email" name="client_email" id="emailadd" required placeholder="Enter a valid email address">
+    <label for="password">Password</label>
+    <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+    <input type="password" name="client_password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required placeholder="Enter a valid password">
+    <input type="submit" value="Register">
+</form>
+
+
+
+
+

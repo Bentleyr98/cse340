@@ -33,7 +33,7 @@ Util.getNav = async function (req, res, next) {
 Util.buildVehicle = async function (data) {
     let view =  `
     <div class="inv-detail">
-    <img src="${data.rows[0].inv_image}" alt="Image of ${data.rows[0].inv_make + "" + data.rows[0].inv_model}"></img>
+    <img src="${data.rows[0].inv_image}" alt="Image of ${data.rows[0].inv_make + "" + data.rows[0].inv_model}"/>
     <div class="details">
     <p><span class="bold">Price:</span> $${new Intl.NumberFormat('en-US').format(data.rows[0].inv_price)}</p>
     <p><span class="bold">Color:</span> ${data.rows[0].inv_color}</p>
@@ -45,7 +45,7 @@ Util.buildVehicle = async function (data) {
 
 Util.buildClassificationDropDown = function (data) {
     let list = "<select id='classificationId' name='classification_id' required>"
-    list += "<option>Choose a Classification</option>"
+    list += "<option value=''>Choose a Classification</option>"
     data.rows.forEach((row) => {
         list += "<option value='" + row.classification_id + "'>"
         list += row.classification_name

@@ -45,7 +45,7 @@ Util.buildVehicle = async function (data) {
 
 Util.buildClassificationDropDown = function (data) {
     let list = "<select id='classificationId' name='classification_id' required>"
-    list += "<option value=''>Choose a Classification</option>"
+    list += "<option>Choose a Classification</option>"
     data.rows.forEach((row) => {
         list += "<option value='" + row.classification_id + "'>"
         list += row.classification_name

@@ -7,7 +7,7 @@ invCont.buildByClassification = async function (req, res, next) {
     const classificationId = parseInt(req.params.classificationId)
     let data = await invModel.getVehiclesByClassificationId(classificationId)
     let nav = await utilities.getNav()
-    let className = req.params.classification_name
+    let className = "No"
     if(data.length > 0){
     className = data[0].classification_name}
 

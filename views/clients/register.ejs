@@ -10,17 +10,21 @@
 <% } %>
 
 <% if (errors) { %>
-    <p class="notice"><%= errors %></p>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
 <% } %>
 
 
 <form action="/clients/register" method="post">
     <label class="bold" for="fname">First name</label>
-    <input type="text" name="client_firstname" id="fname" required placeholder="Enter your first name">
+    <input type="text" name="client_firstname" id="fname" required value="<%= locals.client_firstname %>">
     <label class="bold" for="lname">Last name</label>
-    <input type="text" name="client_lastname" id="lname" required placeholder="Enter your last name">
+    <input type="text" name="client_lastname" id="lname" required value="<%= locals.client_lastname %>">
     <label class="bold" for="email">Email address</label>
-    <input type="email" name="client_email" id="email" required placeholder="Enter a valid email address">
+    <input type="email" name="client_email" id="email" required value="<%= locals.client_email %>">
     <label  class="bold" for="password">Password</label>
     <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
     <input type="password" name="client_password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required placeholder="Enter a valid password">

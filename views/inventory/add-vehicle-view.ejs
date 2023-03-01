@@ -11,22 +11,22 @@
 
 <div class="form-center">
 <form action="/inv/add-vehicle" method="post">
-    <label class="bold" for="invMake">Make</label>
-    <input type="text" name="inv_make" id="invMake" required placeholder="Enter the vehicle's make">
-    <label class="bold" for="invModel">Model</label>
-    <input type="text" name="inv_model" id="invModel" required placeholder="Enter the vehicle's model"> 
-    <label class="bold" for="invYear">Year</label>
-    <input type="number" name="inv_year" id="invYear" required placeholder="Enter the vehicle's year">
-    <label class="bold" for="invDesc">Description</label>
-    <textarea name="inv_description" id="invDesc" required placeholder="Enter the vehicle's description"></textarea>
-    <label class="bold" for="invPrice">Price</label>
-    <input type="number" name="inv_price" id="invPrice" required placeholder="Enter the vehicle's price">
-    <label class="bold" for="invMiles">Miles</label>
-    <input type="number" name="inv_miles" id="invMiles" required placeholder="Enter the vehicle's miles">
-    <label class="bold" for="invColor">Color</label>
-    <input type="text" name="inv_color" id="invColor" required placeholder="Enter the vehicle's color">
     <label class="bold" for="classificationId">Classification</label>
     <%- classifications %>
+    <label class="bold" for="invMake">Make</label>
+    <input type="text" name="inv_make" id="invMake" required placeholder="Enter the vehicle's make" value="<%= locals.inv_make %>">
+    <label class="bold" for="invModel">Model</label>
+    <input type="text" name="inv_model" id="invModel" required placeholder="Enter the vehicle's model" value="<%= locals.inv_model %>"> 
+    <label class="bold" for="invYear">Year</label>
+    <input type="number" name="inv_year" id="invYear" minlength="4" required placeholder="Enter the vehicle's year" value="<%= locals.inv_year %>">
+    <label class="bold" for="invDesc">Description</label>
+    <textarea name="inv_description" id="invDesc" required placeholder="Enter the vehicle's description"><%= locals.inv_description %></textarea>
+    <label class="bold" for="invPrice">Price</label>
+    <input type="number" name="inv_price" id="invPrice" required placeholder="Enter the vehicle's price" value="<%= locals.inv_price %>">
+    <label class="bold" for="invMiles">Miles</label>
+    <input type="number" name="inv_miles" id="invMiles" required placeholder="Enter the vehicle's miles" value="<%= locals.inv_miles %>">
+    <label class="bold" for="invColor">Color</label>
+    <input type="text" name="inv_color" id="invColor" required placeholder="Enter the vehicle's color" value="<%= locals.inv_color %>">
     <input type="submit" value="Add Vehicle">
 </form>
 </div>

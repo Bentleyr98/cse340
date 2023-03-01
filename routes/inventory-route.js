@@ -10,7 +10,7 @@ router.get("/detail/:inv_id", invController.buildByVehicleID);
 
 
 //manage
-router.get("/management", invController.management);
+router.get("/", invController.management);
 
 router.get("/add-classification", invController.addClassification);
 router.post("/add-classification", invController.registerClassification);

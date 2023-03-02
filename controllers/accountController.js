@@ -56,8 +56,7 @@ async function registerClient(req, res) {
     client_firstname,
     client_lastname,
     client_email,
-    //hashedPassword
-    client_password
+    hashedPassword
   )
   console.log(regResult)
   if (regResult) {

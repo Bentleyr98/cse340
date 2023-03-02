@@ -9,24 +9,35 @@
     <p class="notice"><%= message %></p>
 <% } %>
 
+<% if (errors) { %>
+    <% console.log(errors)%>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+  
+
+
 <div class="form-center">
 <form action="/inv/add-vehicle" method="post">
-    <label class="bold" for="classificationId">Classification</label>
+    <label class="bold" for="classificationList">Classification</label>
     <%- classifications %>
     <label class="bold" for="invMake">Make</label>
-    <input type="text" name="inv_make" id="invMake" required placeholder="Enter the vehicle's make" value="<%= locals.inv_make %>">
+    <input type="text" name="inv_make" id="invMake" minlength="3" required placeholder="Enter the vehicle's make" value="<%= locals.inv_make %>">
     <label class="bold" for="invModel">Model</label>
-    <input type="text" name="inv_model" id="invModel" required placeholder="Enter the vehicle's model" value="<%= locals.inv_model %>"> 
+    <input type="text" name="inv_model" id="invModel" minlength="3" required placeholder="Enter the vehicle's model" value="<%= locals.inv_model %>"> 
     <label class="bold" for="invYear">Year</label>
-    <input type="number" name="inv_year" id="invYear" minlength="4" required placeholder="Enter the vehicle's year" value="<%= locals.inv_year %>">
+    <input type="text" name="inv_year" id="invYear" minlength="4" pattern="[0-9]\d+" required placeholder="Enter the vehicle's year" value="<%= locals.inv_year %>">
     <label class="bold" for="invDesc">Description</label>
     <textarea name="inv_description" id="invDesc" required placeholder="Enter the vehicle's description"><%= locals.inv_description %></textarea>
     <label class="bold" for="invPrice">Price</label>
-    <input type="number" name="inv_price" id="invPrice" required placeholder="Enter the vehicle's price" value="<%= locals.inv_price %>">
+    <input type="text" name="inv_price" id="invPrice" pattern="[-+]?[0-9]*[.]?[0-9]+" required placeholder="Enter the vehicle's price" value="<%= locals.inv_price %>">
     <label class="bold" for="invMiles">Miles</label>
-    <input type="number" name="inv_miles" id="invMiles" required placeholder="Enter the vehicle's miles" value="<%= locals.inv_miles %>">
+    <input type="text" name="inv_miles" id="invMiles" pattern="[-+]?[0-9]*[.]?[0-9]+" required placeholder="Enter the vehicle's miles" value="<%= locals.inv_miles %>">
     <label class="bold" for="invColor">Color</label>
-    <input type="text" name="inv_color" id="invColor" required placeholder="Enter the vehicle's color" value="<%= locals.inv_color %>">
+    <input type="text" name="inv_color" id="invColor" minlength="3" required placeholder="Enter the vehicle's color" value="<%= locals.inv_color %>">
     <input type="submit" value="Add Vehicle">
 </form>
 </div>

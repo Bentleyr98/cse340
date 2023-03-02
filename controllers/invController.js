@@ -50,6 +50,7 @@ invCont.addClassification = async function (req, res, next) {
     let nav = await utilities.getNav()
     res.render("../views/inventory/add-classification-view", {
         title: "Add New Classification",
+        errors: null,
         nav,
         message: null,
     })
@@ -58,10 +59,11 @@ invCont.addClassification = async function (req, res, next) {
 
 invCont.addVehicle = async function (req, res, next) {
     let nav = await utilities.getNav()
-    let classifications = await utilities.getClassifications()
+    let classifications = await utilities.getClassifications(classification_id = null)
     res.render("../views/inventory/add-vehicle-view", {
         title: "Add New Vehicle",
         nav,
+        errors: null,
         classifications,
         message: null,
     })

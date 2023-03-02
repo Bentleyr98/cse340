@@ -18,7 +18,7 @@ input:focus:required, textarea:focus:required {
   width: 100%;
  }
 
- input:required:valid {
+ input:required:valid, textarea:required:valid {
     outline: solid green 2px;
  }
 

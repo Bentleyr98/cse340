@@ -1,7 +1,7 @@
 const utilities = require("./")
 const { body, validationResult } = require("express-validator")
 const validate = {}
-const invModel = require("../models/account-model")
+const invModel = require("../models/inventory-model")
 
 /*  **********************************
  *  Registration Data Validation Rules
@@ -12,7 +12,7 @@ validate.classificationRules = () => {
       body("classification_name")
         .trim()
         .escape()
-        .isLength({ min: 1 })
+        .isLength({ min: 3 })
         .withMessage("Please provide a valid classification.")
         .custom(async (classification_name) => {
             const classExists = await invModel.checkExistingClassification(classification_name)
@@ -41,55 +41,94 @@ validate.classificationRules = () => {
   }
 
 
-  validate.loginRules = () => {
+  validate.vehicleRules = () => {
     return [
-      // valid email is required and has to already exist in the DB
-      body("client_email")
+      // valid make is required
+      body("inv_make")
       .trim()
-      .isEmail()
-      .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required.")
-      .custom(async (client_email) => {
-        const emailExists = await accountModel.checkExistingEmail(client_email)
-        if (!emailExists){
-          throw new Error("Email doesn't exist in our system. Please create an account or use a different email")
-        }
-      }),
-  
-      // password is required and must be strong password
-      body("client_password")
+      .escape()
+      .isLength({ min: 3 })
+      .withMessage("A valid make is required."),
+
+        // valid model is required
+        body("inv_model")
         .trim()
-        .isStrongPassword({
-          minLength: 12,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 1,
-        })
-        .withMessage("Password does not meet requirements.")
-        .custom(async (client_email, client_password) => {
-            const passwordExists = await accountModel.checkExistingPassword(client_password)
-            console.log(passwordExists)
-            if (!passwordExists){
-              throw new Error("Incorrect password, please try again.")
+        .escape()
+        .isLength({ min: 3 })
+        .withMessage("A valid model is required."),
+
+        // valid year is required
+        body("inv_year")
+        .trim()
+        .escape()
+        .isLength({ min: 4 })
+        .isNumeric()
+        .withMessage("A valid year is required."),
+
+        // valid description is required
+        body("inv_description")
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage("A valid description is required."),
+
+      // valid price is required
+      body("inv_price")
+      .trim()
+      .escape()
+      .isDecimal()
+      .isLength({ min: 1 })
+      .withMessage("A valid price is required."),
+
+      // valid miles is required
+      body("inv_miles")
+      .trim()
+      .escape()
+      .isDecimal()
+      .isLength({ min: 1 })
+      .withMessage("A valid milage is required."),
+
+      // valid color is required
+      body("inv_color")
+      .trim()
+      .escape()
+      .isLength({ min: 3 })
+      .withMessage("A valid color is required."),
+  
+      // classification is required and must be strong password
+      body("classification_id")
+        .trim()
+        .escape()
+        .custom(async (classification_id) => {
+            const classificationExists = await invModel.checkExistingClassification(classification_id)
+            if (classificationExists){
+              throw new Error("Classification doesn't exist")
             }
           })
     ]
   }
 
     // Check data and return errors or continue to login
-    validate.checkLoginData = async (req, res, next) => {
-        const { client_email } = req.body
+    validate.checkVehicleData = async (req, res, next) => {
+        const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color } = req.body
         let errors = []
         errors = validationResult (req)
         if (!errors.isEmpty()){
             let nav = await utilities.getNav()
-            res.render("../views/clients/login", {
+            let classifications = await utilities.getClassifications(classification_id)
+            res.render("../views/inventory/add-vehicle-view", {
                 errors,
                 message: null,
                 title: "Login",
                 nav,
-                client_email,
+                classifications,
+                inv_make,
+                inv_model,
+                inv_year,
+                inv_description,
+                inv_price,
+                inv_miles,
+                inv_color
             })
             return
         }

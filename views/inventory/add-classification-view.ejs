@@ -9,13 +9,22 @@
     <p class="notice"><%= message %></p>
 <% } %>
 
+<% if (errors) { %>
+  <% console.log(errors)%>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <div class="form-center">
 <form action="/inv/add-classification" method="post">
     <span>FIELD IS REQUIRED</span>
     <hr class="line">
     <label for="class" class="bold big">Classification Name</label>
     <span>NAME MAY  NOT CONTAIN A SPACE OR SPECIAL CHARACTER OF ANY KIND</span>
-    <input type="text" name="classification_name" id="class" placeholder="Enter a valid classification" required>
+    <input type="text" name="classification_name" id="class" pattern="^[a-zA-Z]*$" minlength="3" placeholder="Enter a valid classification" title="Cannot contain any spaces, numbers, or special characters" required>
     <input type="submit" value="Add Classification">
 </form>
 </div>

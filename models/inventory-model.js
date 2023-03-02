@@ -1,8 +1,24 @@
 const pool = require("../database")
 
 async function getClassifications(){
-    return await pool.query("SELECT * FROM public.classification ORDER BY classification_name");
-};
+    try {
+        return await pool.query("SELECT * FROM public.classification ORDER BY classification_name");
+    }
+    catch(error){
+        console.error('getclassifications error' + error)
+    }
+}
+
+async function checkExistingClassification(classification_name){
+    try {
+        const data = await pool.query("SELECT * FROM public.classification WHERE classification_name = $1",
+        [classification_name])
+        return data.rows.count()
+    }
+    catch(error){
+        console.error('create classification error' + error)
+    }
+}
 
 async function getVehiclesByClassificationId(classificationId){
     try {
@@ -56,4 +72,4 @@ async function registerVehicle( inv_make, inv_model, inv_year, inv_description, 
 
 }
 
-module.exports = {getClassifications, getVehiclesByClassificationId, getVehiclesByInvId, registerClassification, registerVehicle};
+module.exports = {getClassifications, getVehiclesByClassificationId, getVehiclesByInvId, registerClassification, registerVehicle, checkExistingClassification};

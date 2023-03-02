@@ -43,21 +43,23 @@ Util.buildVehicle = async function (data) {
     return view
 }
 
-Util.buildClassificationDropDown = function (data) {
-    let list = "<select id='classificationId' name='classification_id' required>"
+Util.buildClassificationDropDown = function (data, classification_id = null) {
+    let list = "<select id='classificationList' name='classification_id' required>"
     list += "<option>Choose a Classification</option>"
     data.rows.forEach((row) => {
-        list += "<option value='" + row.classification_id + "'>"
-        list += row.classification_name
-        list += "</option>"
+        list += "<option value='" + row.classification_id + "'"
+        if (classification_id != null && row.classification_id == classification_id){
+            list += " selected "
+        }
+        list += ">" + row.classification_name + "</option>"
     })
     list += "</select>"
     return list
 }
 
-Util.getClassifications = async function (req, res, next) {
+Util.getClassifications = async function (classification_id) {
     let data = await invModel.getClassifications()
-    classifications = Util.buildClassificationDropDown(data)
+    classifications = Util.buildClassificationDropDown(data, classification_id)
     return classifications
 }
 

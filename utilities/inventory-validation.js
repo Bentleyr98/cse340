@@ -50,34 +50,34 @@ validate.classificationRules = () => {
       .isLength({ min: 3 })
       .withMessage("A valid make is required."),
 
-        // valid model is required
-        body("inv_model")
-        .trim()
-        .escape()
-        .isLength({ min: 3 })
-        .withMessage("A valid model is required."),
+      // valid model is required
+      body("inv_model")
+      .trim()
+      .escape()
+      .isLength({ min: 3 })
+      .withMessage("A valid model is required."),
 
-        // valid year is required
-        body("inv_year")
-        .trim()
-        .escape()
-        .isLength({ min: 4 })
-        .isNumeric()
-        .withMessage("A valid year is required."),
+      // valid year is required
+      body("inv_year")
+      .trim()
+      .escape()
+      .isLength({ min: 4 })
+      .isNumeric()
+      .withMessage("A valid year is required."),
 
-        // valid description is required
-        body("inv_description")
-        .trim()
-        .escape()
-        .isLength({ min: 1 })
-        .withMessage("A valid description is required."),
+      // valid description is required
+      body("inv_description")
+      .trim()
+      .escape()
+      .isLength({ min: 20 })
+      .withMessage("A valid description is required."),
 
       // valid price is required
       body("inv_price")
       .trim()
       .escape()
       .isDecimal()
-      .isLength({ min: 1 })
+      .isLength({ min: 2 })
       .withMessage("A valid price is required."),
 
       // valid miles is required

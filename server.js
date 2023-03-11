@@ -11,12 +11,16 @@ const env = require("dotenv").config()
 const app = express()
 const baseController = require("./controllers/baseController")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+const Util = require("./utilities")
 
 /* ***********************
  * Middleware
  *************************/
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+app.use(Util.checkJWTToken)
 
 
 /* ***********************
@@ -37,7 +41,7 @@ app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", require("./routes/inventory-route"))
 // Account routes
-app.use("/clients", require("./routes/account-route"))
+app.use("/client", require("./routes/account-route"))
 
 
 

@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 // Constructs the nav HTML unordered list
 Util.buildNav = function (data) {
@@ -62,5 +64,70 @@ Util.getClassifications = async function (classification_id) {
     classifications = Util.buildClassificationDropDown(data, classification_id)
     return classifications
 }
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, clientData) {
+        if (err) {
+          res.clearCookie("jwt")
+          return res.redirect("/client/login")
+        }
+      res.locals.clientData = clientData
+      res.locals.loggedin = 1
+      if (res.locals.clientData.client_type == "Employee" || res.locals.clientData.client_type == "Admin"){
+        res.locals.clientClearance = 1
+    } else {
+        res.locals.clientClearance = 0
+        }
+    next()
+      })
+  } else {
+    next()
+  }
+}
+
+
+  /* ****************************************
+ *  Authorize JWT Token
+ * ************************************ */
+ Util.jwtAuth = (req, res, next) => {
+  if(res.locals.clientData){
+    if (res.locals.clientClearance){
+      next()
+  } else {
+      return res.redirect("/client/login")
+      }}
+  else{
+    return res.redirect("/client/login")
+  }
+}
+
+// Middleware to check for client login
+Util.checkClientLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    return res.redirect("/client/login")
+  }
+}
+
+
+  /* ****************************************
+ *  Delete JWT Token
+ * ************************************ */
+  Util.deleteJwt= (req, res, next) => {
+    if(req.cookies.jwt){
+      res.clearCookie("jwt", { httpOnly: true })
+      return res.status(403).redirect("/")
+    } else {
+      next()
+    }
+   }
 
 module.exports = Util

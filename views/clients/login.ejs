@@ -18,7 +18,7 @@
    </ul>
   <% } %>
 
-<form id="loginForm" action="/clients/login" method="post">
+<form id="loginForm" action="/client/login" method="post">
     <label class="bold" for="email">Username</label>
     <input type="email" name="client_email" id="email" required value="<%= locals.client_email %>">
     <label class="bold" for="password">Password</label>
@@ -26,4 +26,4 @@
     <input type="password" name="client_password" id="password" required placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
     <input type="submit" value="Login">
 </form>
-<p class="title">No Account? <a href="/clients/register">Sign-up</a></p>
+<p class="title">No Account? <a href="/client/register">Sign-up</a></p>

@@ -1,6 +1,5 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities")
-
 const invCont = {}
 
 invCont.buildByClassification = async function (req, res, next) {
@@ -10,7 +9,6 @@ invCont.buildByClassification = async function (req, res, next) {
     let className = "No"
     if(data.length > 0){
     className = data[0].classification_name}
-
     res.render("./inventory/classification-view", {
         title: className + " vehicles",
         nav,
@@ -31,7 +29,7 @@ invCont.buildByVehicleID = async function (req, res, next) {
         view,
         nav,
         message: null,
-        data,
+        data
     })
 
 }
@@ -41,7 +39,7 @@ invCont.management = async function (req, res, next) {
     res.render("../views/inventory/management-view", {
         title: "Vehicle Management",
         nav,
-        message: null,
+        message: null
     })
 
 }
@@ -80,14 +78,13 @@ invCont.registerClassification = async function (req, res) {
     const regResult = await invModel.registerClassification(
         classification_name
     )
-    console.log(regResult)
     let nav = await utilities.getNav()
     if (regResult) {
       res.status(201).render("inventory/management-view.ejs", {
         title: "Vehicle Management",
         nav,
         message: `The ${classification_name} classification was successfully added.`,
-        errors: null,
+        errors: null
       })
     } else {
       const message = "Sorry, it failed to add the new classification."
@@ -95,7 +92,7 @@ invCont.registerClassification = async function (req, res) {
         title: "Add New Classification",
         nav,
         message,
-        errors: null,
+        errors: null
       })
     }
   }
@@ -112,7 +109,6 @@ invCont.registerVehicle = async function (req, res) {
     const regResult = await invModel.registerVehicle(
         inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail
     )
-    console.log(regResult)
     let nav = await utilities.getNav()
     let classifications = await utilities.getClassifications()
     if (regResult) {
@@ -120,7 +116,7 @@ invCont.registerVehicle = async function (req, res) {
         title: "Vehicle Management",
         nav,
         message: `The ${inv_make} ${inv_model} vehicle was successfully added.`,
-        errors: null,
+        errors: null
       })
     } else {
       const message = "Sorry, it failed to add the new vehicle."
@@ -129,7 +125,7 @@ invCont.registerVehicle = async function (req, res) {
         nav,
         classifications,
         message,
-        errors: null,
+        errors: null
       })
     }
   }

@@ -36,16 +36,18 @@ async function checkExistingEmail(client_email){
     }
   }
 
-async function checkExistingPassword(client_password){
-    try {
-      const sql = 'SELECT * FROM client WHERE client_password = $1'
-      const password = await pool.query(sql, [client_password])
-      return password.rowCount
-    } catch (error) {
-      console.log("ERROR!")
-      console.log(error.message)
-      return error.message
-    } 
+/* *****************************
+* Return client data using email address
+* ***************************** */
+async function getClientByEmail (client_email) {
+  try {
+    const result = await pool.query(
+      'SELECT client_firstname, client_lastname, client_email, client_type, client_password FROM client WHERE client_email = $1',
+      [client_email])
+    return result.rows[0]
+  } catch (error) {
+    console.error(error)
   }
+}
 
-module.exports = { registerClient, checkExistingEmail, checkExistingPassword }
+module.exports = { registerClient, checkExistingEmail, getClientByEmail }

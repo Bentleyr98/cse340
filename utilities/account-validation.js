@@ -98,15 +98,6 @@ validate.loginRules = () => {
         minSymbols: 1,
       })
       .withMessage("Password does not meet requirements.")
-      // .custom(async (client_email, client_password) => {
-      //   const passwordExists = await accountModel.checkExistingPassword(
-      //     client_password
-      //   )
-      //   console.log(passwordExists)
-      //   if (!passwordExists) {
-      //     throw new Error("Incorrect password, please try again.")
-      //   }
-      // }),
   ]
 }
 

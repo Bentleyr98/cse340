@@ -1,6 +1,7 @@
 // Needed Resources 
 const express = require("express"); 
-const router = new express.Router(); 
+const router = new express.Router();
+const util = require("../utilities");
 const invController = require("../controllers/invController");
 const regValidate = require('../utilities/inventory-validation')
 
@@ -11,11 +12,12 @@ router.get("/detail/:inv_id", invController.buildByVehicleID);
 
 
 //manage
-router.get("/", invController.management);
+router.get("/", util.jwtAuth, invController.management);
 
-router.get("/add-classification", invController.addClassification);
-router.post("/add-classification", regValidate.classificationRules(), regValidate.checkClassData ,invController.registerClassification);
-router.get("/add-vehicle", invController.addVehicle);
-router.post("/add-vehicle", regValidate.vehicleRules(), regValidate.checkVehicleData ,invController.registerVehicle);
+router.get("/add-classification", util.jwtAuth, invController.addClassification);
+router.post("/add-classification", util.jwtAuth, regValidate.classificationRules(), regValidate.checkClassData ,invController.registerClassification);
+
+router.get("/add-vehicle", util.jwtAuth, invController.addVehicle);
+router.post("/add-vehicle", util.jwtAuth, regValidate.vehicleRules(), regValidate.checkVehicleData ,invController.registerVehicle);
 
 module.exports = router;

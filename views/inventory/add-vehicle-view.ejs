@@ -38,6 +38,10 @@
     <input type="text" name="inv_miles" id="invMiles" pattern="[-+]?[0-9]*[.]?[0-9]+" required placeholder="Enter the vehicle's miles" value="<%= locals.inv_miles %>">
     <label class="bold" for="invColor">Color</label>
     <input type="text" name="inv_color" id="invColor" minlength="3" required placeholder="Enter the vehicle's color" value="<%= locals.inv_color %>">
+    <label class="bold" for="invImage">Image Path</label>
+    <input type="text" name="inv_image" id="invImage" minlength="9" required value="/images/vehicles/no-image.png" value="<%= locals.inv_image %>">
+    <label class="bold" for="invThumbnail">Thumbnail Image Path</label>
+    <input type="text" name="inv_thumbnail" id="invThumbnail" minlength="9" required value="/images/vehicles/no-image-tn.png" value="<%= locals.inv_thumbnail %>">
     <input type="submit" value="Add Vehicle">
 </form>
 </div>

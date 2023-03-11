@@ -101,11 +101,9 @@ invCont.registerClassification = async function (req, res) {
  *  Process vehicle request
  **************************************** */  
 invCont.registerVehicle = async function (req, res) {
-    const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } =
+    const { inv_make, inv_model, inv_year, inv_image, inv_thumbnail, inv_description, inv_price, inv_miles, inv_color, classification_id } =
       req.body
-  
-    const inv_image = "/images/vehicles/no-image.png"
-    const inv_thumbnail = "/images/vehicles/no-image-tn.png"
+
     const regResult = await invModel.registerVehicle(
         inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_image, inv_thumbnail
     )

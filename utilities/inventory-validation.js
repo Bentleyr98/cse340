@@ -94,6 +94,20 @@ validate.classificationRules = () => {
       .escape()
       .isLength({ min: 3 })
       .withMessage("A valid color is required."),
+
+      // valid image path is required
+      body("inv_image")
+      .trim()
+      .escape()
+      .isLength({ min: 9 })
+      .withMessage("A valid image path is required."),
+
+      // valid image path is required
+      body("inv_thumbnail")
+      .trim()
+      .escape()
+      .isLength({ min: 9 })
+      .withMessage("A valid image path is required."),
   
       // classification is required and must be strong password
       body("classification_id")
@@ -110,7 +124,7 @@ validate.classificationRules = () => {
 
     // Check data and return errors or continue to login
     validate.checkVehicleData = async (req, res, next) => {
-        const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color } = req.body
+        const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, inv_image, inv_thumbnail } = req.body
         let errors = []
         errors = validationResult (req)
         if (!errors.isEmpty()){
@@ -128,7 +142,9 @@ validate.classificationRules = () => {
                 inv_description,
                 inv_price,
                 inv_miles,
-                inv_color
+                inv_color,
+                inv_image,
+                inv_thumbnail
             })
             return
         }

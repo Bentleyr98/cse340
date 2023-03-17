@@ -37,7 +37,7 @@ header{
   padding-left: 20px;
 }
 
-p.copyright, .title{
+p.copyright, .title, a.copyright{
   padding-left: 20px;
 }
 
@@ -297,13 +297,6 @@ form input, textarea, select{
     margin-right: 50px;
     margin-left: 20px;
   }
-
-  /* .form-center {
-    display:flex;
-    justify-items: center;
-  } */
-
-
 
   .advertise {
     top: 300px;

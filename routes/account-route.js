@@ -6,17 +6,17 @@ const regValidate = require('../utilities/account-validation')
 const baseController = require("../controllers/baseController")
 
 
-router.get("/login", accController.buildLogin);
-router.get("/logout", util.deleteJwt, baseController.buildHome);
-router.get("/register", accController.buildRegister);
-router.get("/", util.checkClientLogin, accController.buildManagement);
+router.get("/login", util.handleErrors(accController.buildLogin));
+router.get("/logout", util.deleteJwt, util.handleErrors(baseController.buildHome));
+router.get("/register", util.handleErrors(accController.buildRegister));
+router.get("/", util.checkClientLogin, util.handleErrors(accController.buildManagement));
 
 // Process the registration data
 router.post(
     "/register",
     regValidate.registationRules(),
     regValidate.checkRegData,
-    accController.registerClient
+    util.handleErrors(accController.registerClient)
   )
 
 // Process the login attempt
@@ -24,7 +24,7 @@ router.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    accController.loginClient
+    util.handleErrors(accController.loginClient)
   )
 
 module.exports = router;

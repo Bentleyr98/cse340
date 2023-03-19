@@ -5,6 +5,12 @@
       res.redirect('/')
 } %>
 
+
+
+<div class="error">
+<img class="deadend" src="/images/site/deadend.jpg" alt="Dead end sign">
+<button class="goBack" onclick="history.back()">Go Back</button>
 <% if (message) { %>
-    <p class="title"><%= message %></p>
+    <p class="title errorMessage"><%= message %></p>
 <% } %>
+</div>

@@ -68,7 +68,6 @@ validate.classificationRules = () => {
       // valid description is required
       body("inv_description")
       .trim()
-      .escape()
       .isLength({ min: 20 })
       .withMessage("A valid description is required."),
 
@@ -98,14 +97,12 @@ validate.classificationRules = () => {
       // valid image path is required
       body("inv_image")
       .trim()
-      .escape()
       .isLength({ min: 9 })
       .withMessage("A valid image path is required."),
 
       // valid image path is required
       body("inv_thumbnail")
       .trim()
-      .escape()
       .isLength({ min: 9 })
       .withMessage("A valid image path is required."),
   
@@ -133,7 +130,7 @@ validate.classificationRules = () => {
             res.render("../views/inventory/add-vehicle-view", {
                 errors,
                 message: null,
-                title: "Login",
+                title: "Add Vehicle",
                 nav,
                 classifications,
                 inv_make,
@@ -150,5 +147,36 @@ validate.classificationRules = () => {
         }
         next()
       }
+
+  // validate vehicle changes
+  validate.checkUpdateData = async (req, res, next) => {
+    const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, inv_image, inv_thumbnail, inv_id } = req.body
+    let errors = []
+    errors = validationResult (req)
+    if (!errors.isEmpty()){
+        let nav = await utilities.getNav()
+        let classifications = await utilities.getClassifications(classification_id)
+        const vehicleName = `${inv_make} ${inv_model}`
+        res.render("../views/inventory/edit-vehicle", {
+            errors,
+            message: null,
+            title: "Edit " + vehicleName,
+            nav,
+            classifications,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_price,
+            inv_miles,
+            inv_color,
+            inv_image,
+            inv_thumbnail,
+            inv_id
+        })
+        return
+    }
+    next()
+  }
 
   module.exports = validate;

@@ -70,8 +70,12 @@ nav ul{
   margin-top: 0;
 }
 
-.managementLinks {
+.managementLinks, .manageVehicles #classificationList, .manageVehicles table {
   margin-left: 30px;
+}
+
+.name{
+  padding-right: 20px;
 }
 
 .inv-detail{
@@ -127,6 +131,10 @@ form input, textarea, select{
   height: auto;
   font-size: 12pt;
   padding: 3px;
+}
+
+.italics {
+  font-style: italic;
 }
 
 .errorMessage{
@@ -304,11 +312,6 @@ form input, textarea, select{
     margin:20px 120px;
     border: #DBF227 3px solid;
   }
-
-  /* nav ul{
-    display: flex;
-    justify-content: space-between;
-  } */
 
   header {
     padding-left: 0px;

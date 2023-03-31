@@ -4,6 +4,7 @@
         <% if (!locals.loggedin) { %>
         <span class="accountLink"><a href="/client/login">My Account</a></span>
         <% } else { %>
+        <span class="accountLink name"><a href="/client/">Welcome <%- locals.clientData.client_firstname %> </a></span>
         <span class="accountLink"><a href="/client/logout">Logout</a></span> <% } %> 
     </div>
 

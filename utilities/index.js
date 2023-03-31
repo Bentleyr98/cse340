@@ -61,7 +61,7 @@ Util.buildClassificationDropDown = function (data, classification_id = null) {
 
 Util.getClassifications = async function (classification_id) {
     let data = await invModel.getClassifications()
-    classifications = Util.buildClassificationDropDown(data, classification_id)
+    const classifications = Util.buildClassificationDropDown(data, classification_id)
     return classifications
 }
 

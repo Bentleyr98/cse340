@@ -1,0 +1,41 @@
+<!-- Content Heading -->
+<% if (title) { %>
+    <h1 class="title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<% if (message) { %>
+    <p class="notice"><%= message %></p>
+<% } %>
+
+<% if (errors) { %>
+    <% console.log(errors)%>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+  
+
+
+<div class="form-center">
+  <form action="/inv/delete" method="post">
+    <label class="bold" for="invMake">Make</label>
+    <input type="text" name="inv_make" id="invMake" readonly minlength="3" required placeholder="Enter the vehicle's make" value="<%= locals.inv_make %>">
+    <label class="bold" for="invModel">Model</label>
+    <input type="text" name="inv_model" id="invModel" readonly minlength="3" required placeholder="Enter the vehicle's model" value="<%= locals.inv_model %>"> 
+    <label class="bold" for="invYear">Year</label>
+    <input type="text" name="inv_year" id="invYear" readonly minlength="4" pattern="[0-9]\d+" required placeholder="Enter the vehicle's year" value="<%= locals.inv_year %>">
+    <label class="bold" for="invPrice">Price</label>
+    <input type="text" name="inv_price" id="invPrice" readonly pattern="[-+]?[0-9]*[.]?[0-9]+" required placeholder="Enter the vehicle's price" value="<%= locals.inv_price %>">
+    <span>Confirm Deletion - The delete is permanent.</span>
+    <input type="submit" name="submit" value="Delete Vehicle">
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+      <% } %>>
+  </form>
+
+
+</div>

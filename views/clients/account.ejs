@@ -21,8 +21,10 @@
 <% if (!locals.clientClearance) { %>
     <h1 class="title">Welcome <%= locals.clientData.client_firstname %></h1>
     <p class="title">You're logged in.</p>
+    <p class="title"><a href="/client/account/<%- locals.clientData.client_id %>">Update Account Information</a></p>
 <% } else if (locals.clientClearance) { %>
     <h2 class="title">Welcome <%= locals.clientData.client_firstname %></h2>
+    <p class="title"><a href="/client/account/<%- locals.clientData.client_id %>">Update Account Information</a></p>
     <h3 class="title">Inventory Management</h3>
     <p class="title"><a href="/inv/">View management options</a></p>
 <% } %>

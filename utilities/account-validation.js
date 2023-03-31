@@ -158,7 +158,6 @@ validate.updateInfoRules = () => {
 
 // Check data and return errors or continue to update information
 validate.checkUpdateData = async (req, res, next) => {
-  const { client_firstname, client_lastname, client_email, client_id } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -168,10 +167,10 @@ validate.checkUpdateData = async (req, res, next) => {
       message: null,
       title: "Edit Account",
       nav,
-      client_firstname,
-      client_lastname,
-      client_email,
-      client_id
+      client_firstname: res.locals.clientData.client_firstname,
+      client_lastname: res.locals.clientData.client_lastname,
+      client_email: res.locals.clientData.client_email,
+      client_id: res.locals.clientData.client_id
     })
     return
   }
